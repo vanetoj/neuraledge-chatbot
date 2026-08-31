@@ -110,7 +110,10 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 if "api_key" not in st.session_state:
-    st.session_state.api_key = os.getenv("ANTHROPIC_API_KEY")
+    try:
+        st.session_state.api_key = st.secrets["ANTHROPIC_API_KEY"]
+    except:
+        st.session_state.api_key = os.getenv("ANTHROPIC_API_KEY")
 
 # ==================== HEADER ====================
 col1, col2 = st.columns([1, 5])
